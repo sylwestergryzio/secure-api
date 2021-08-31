@@ -15,8 +15,3 @@ public class SecureApiAppConfiguration extends WebSecurityConfigurerAdapter {
             .and().oauth2Login();
     }
 }
-
-//.authorizeRequests().mvcMatchers("/orders").authenticated()
-//    .and().cors()
-//    .and().oauth2Login()
-//    .and().oauth2ResourceServer().jwt();
