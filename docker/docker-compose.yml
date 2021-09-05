@@ -1,0 +1,21 @@
+services:
+  postgresdb:
+    image: postgres:13.4
+    environment:
+      POSTGRES_PASSWORD: password1
+    ports:
+      - 5432:5432
+
+  keycloak:
+    image: jboss/keycloak
+    ports:
+      - 8080:8080
+    environment:
+      - KEYCLOAK_USER=admin
+      - KEYCLOAK_PASSWORD=admin
+      - DB_VENDOR=postgres
+      - DB_ADDR=postgresdb:5432
+      - DB_USER=kuser
+      - DB_PASSWORD=kpassword
+    depends_on:
+      - postgresdb

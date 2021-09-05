@@ -7,8 +7,15 @@ spring:
       client:
         registration:
           auth0:
-            clientId: ******
-            clientSecret: ******
+            clientId: ${AUTH0_CLIENT_ID:}
+            clientSecret: ${AUTH0_CLIENT_SECRET:}
+            scope:
+              - openid
+              - profile
+              - email
+          keycloak:
+            clientId: ${KC_CLIENT_ID:}
+            clientSecret: ${KC_CLIENT_SECRET:}
             scope:
               - openid
               - profile
@@ -17,3 +24,9 @@ spring:
           auth0:
             # trailing slash is important!
             issuer-uri: https://sylwesterg.eu.auth0.com/
+          keycloak:
+            issuer-uri: http://well-known.org:8080/auth/realms/well-known
+
+logging:
+  level:
+    root: TRACE
