@@ -10,8 +10,11 @@ public class SecureApiAppConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+            .antMatchers("/callback/code/keycloak").permitAll()
             .antMatchers("/").permitAll()
+            .antMatchers("/orders").hasAuthority("SCOPE_READ_Orders")
+            .antMatchers("/employees").hasAuthority("SCOPE_READ_Employees")
             .anyRequest().authenticated()
-            .and().oauth2Login();
+            .and().oauth2ResourceServer().jwt();
     }
 }
